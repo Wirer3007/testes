@@ -1,106 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <title>teste</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        body,html{
-            height: 100%;
-        }
+
+        
+
+        
     </style>
-   
-   
 </head>
 
 <body>
 
     <div>
-
         <input type="text" id="pesquisa" placeholder="buscar usuarios">
-
-        <button> pesquisar </button>
-
+        <button onclick="buscarUsers()">Pesquisar</button>
     </div>
 
-    <div id="usuarios">
-
-    </div>
-   
-    
-    
-
+    <div id="usuarios"></div>
 
     <script>
 
-        const usuarioss = document.getElementById ("usuarios");
-        const pesquisa= document.getElementById ("pesquisa");
+        const pesquisa = document.getElementById("pesquisa");
 
-        let guardaAi = []
+        let guardaAi = [];
 
-        async function buscarUsers(){
+        async function buscarUsers() {
 
-            try{
+            try {
 
-            const rps = await fetch ("https://api-9-mt0n.onrender.com/usuarios")
-             
-            const dados = await rps.json()
+                const rps = await fetch("https://api-9-mt0n.onrender.com/usuarios");
 
-            users = dados
+                const dados = await rps.json();
 
-            mostrarUsers(users)
+                guardaAi = dados;
 
-        } catch (erro){
+                mostrarUsers(guardaAi);
 
-            alert("erro na api", erro)
+            } catch (erro) {
+
+                console.log("Erro:", erro);
+
+            }
+
         }
-        
-    }
 
-    function mostrarUsers(Lista) {
+        function mostrarUsers(lista) {
 
-        usuarioss.innerHTML = ''
+            const usuarioss = document.getElementById("usuarios");
 
-        Lista.array.forEach(usuarios => {
+            usuarioss.innerHTML = '';
 
-            usuarioss.innerHTML +=  
-            `
-            <div class="card">
+            lista.forEach(usuario => {
 
-                <h3>${usuarios.nome}</h3>
-                <h3>${usuarios.id}</h3>
-                <h3>${usuarios.email}</h3>
-                <h3>${usuarios.telefone}</h3>
+                usuarioss.innerHTML += `
+                    <div class="card">
 
+                        <h3>${usuario.nome}</h3>
+                        <h3>${usuario.id}</h3>
+                        <h3>${usuario.email}</h3>
+                        <h3>${usuario.telefone}</h3>
 
+                    </div>
+                `;
 
-            </div>
-            
-            `
-            
+            });
+
+        }
+
+        pesquisa.addEventListener('input', () => {
+
+            const tx = pesquisa.value.toLowerCase();
+
+            const filtro = guardaAi.filter(usuario =>
+
+                usuario.nome.toLowerCase().includes(tx) ||
+                usuario.id.toString().includes(tx)
+
+            );
+
+            mostrarUsers(filtro);
+
         });
-    }
 
-    pesquisa.addEventListener ('input', () => {
+        buscarUsers();
 
-        const tx = pesquisa.value.toLowerCase()
-
-        const filtro = usuarioss.filter (usuarios =>
-            usuarios.nome.toLowerCase().includes(tx),
-            usuarios.id.toLowerCase().includes(tx)
-        )
-
-        mostrarUsers(filtro)
-
-    });
-
-    buscarUsers()
-
-
-
-        
     </script>
-    
+
 </body>
 </html>
