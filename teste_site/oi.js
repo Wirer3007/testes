@@ -8,6 +8,8 @@ async function buscarUsers() {
 
     const lista = document.getElementById("lista");
 
+    const InputUsers = document.getElementById("ColocarUsers");
+
     lista.innerHTML = "";
 
     usuarios.forEach(usuario => {
