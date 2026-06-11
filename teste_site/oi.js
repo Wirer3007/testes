@@ -1,32 +1,51 @@
 async function buscarUsers() {
 
-            
+    try {
 
-    const rps = await fetch("https://api-9-mt0n.onrender.com/usuarios");
+        const pesquisa = document.getElementById("pesquisador").value;
+        
 
-    const usuarios = await rps.json();
+        const lista = document.getElementById("lista");
 
-    const lista = document.getElementById("lista");
+        if (pesquisa.toLowerCase() === "kaiju") {
+            alert("série preferida detectada!");
+        }
 
-    const InputUsers = document.getElementById("ColocarUsers");
+        const rps = await fetch(
+            `https://api.tvmaze.com/search/shows?q=${pesquisa}`
+        );
 
-    lista.innerHTML = "";
+        const filmes = await rps.json();
 
-    usuarios.forEach(usuario => {
-
-
-    lista.innerHTML += `
-        <li>
-
-        ${usuario.id}
-        ${usuario.nome}
-        ${usuario.telefone}
-        ${usuario.email}
+        lista.innerHTML = "";
 
         
-        </li>
-    `;
 
 
-});
+        filmes.forEach(filme => {
+
+            lista.innerHTML += `
+                <li>
+                    <img src="${filme.show.image ? filme.show.image.medium : ''}" width="200">
+
+                    <ul>
+                        <li>Título: ${filme.show.name}</li>
+                        <li>Ano: ${filme.show.premiered ? filme.show.premiered.split('-')[0] : ''}</li>
+                        <li>Gênero: ${filme.show.genres}</li>
+                        <li>Sinopse: ${filme.show.summary}</li>
+                    </ul>
+                </li>
+            `;
+
+        });
+
+
+
+    } catch (erro) {
+
+        document.getElementById("lista").innerHTML =
+            "<li>Erro na busca da API</li>";
+
+        console.log(erro);
+    }
 }

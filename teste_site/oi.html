@@ -1,43 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <title>teste</title>
+    <title>Filmes</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <style>
-
-    body{
-
-    background-color: rgb(245, 255, 255);
-    margin-left: 700px;
-    margin-top: 100px;
-
-    }
-
-    #oi{
-        background-color: rgb(255, 255, 249);
-        width: 100px;
-        height: 50px;
-        border-radius: 10px;
-        box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
-        
-    }
-        #ColocarUsers{
-
-        box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
-        width: 200px;
-        height: 30px;
-        border-radius: 10px;
-    }
-        
-    </style>
+    <link rel="stylesheet" href="oi.css">
 </head>
 
 <body>
 
-    <div>
-        <input type="string" name="insira o id do usuario" id="ColocarUsers">
+    <div id="topoP">
+        <h4>venha pesquisar aqui filmes e series</h4>
+        <input type="text" name="insira o id do usuario" id="pesquisador">
+        
         <button onclick="buscarUsers()" id="oi">Pesquisar</button>
     </div>
 
