@@ -1,32 +1,19 @@
-async function buscarUsers() {
+async function buscarLivros() {
 
-            
+    const busca = document.getElementById("ColocarLivros").value;
 
-    const rps = await fetch("https://api-9-mt0n.onrender.com/usuarios");
+    const url = "https://api-12-s9h2.onrender.com/livros";
 
-    const usuarios = await rps.json();
+    const mensagem = document.getElementById("lista")
 
-    const lista = document.getElementById("lista");
+    const resposta = await fetch(
+        `${url}?titulo=${busca}`
+    );
 
-    const InputUsers = document.getElementById("ColocarUsers");
+    const livros = await resposta.json();
 
-    lista.innerHTML = "";
+    renderizarLivros(livros);
 
-    usuarios.forEach(usuario => {
+    mensagem.innerHTML = "Busca realizada.";
 
-
-    lista.innerHTML += `
-        <li>
-
-        ${usuario.id}
-        ${usuario.nome}
-        ${usuario.telefone}
-        ${usuario.email}
-
-        
-        </li>
-    `;
-
-
-});
 }
