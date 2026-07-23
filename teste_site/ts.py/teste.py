@@ -1,10 +1,12 @@
 from selenium import webdriver
 import time
-
+wp= 'https://wplace.live/'
+gt= 'https://github.com/'
+yt= 'https://www.youtube.com/'
 sites = [
-    'https://wplace.live/',
-    'https://github.com/',
-    'https://www.youtube.com/'
+   wp,
+   gt,
+   yt
 ]
 driver = webdriver.Chrome()
 
