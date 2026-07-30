@@ -1,0 +1,1 @@
+BANCO = 'mercado.db'
